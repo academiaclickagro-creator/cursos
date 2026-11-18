@@ -1,0 +1,33 @@
+{
+  "name": "academia-click-agro-backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test:webhook": "node scripts/test-webhook.mjs",
+    "create:admin": "node scripts/create-admin.mjs",
+    "audit": "node scripts/audit-agent.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "autoprefixer": "^10.6.1",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.47.0",
+    "mercadopago": "^2.0.15",
+    "next": "14.2.24",
+    "postcss": "^8.5.28",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resend": "^6.28.1",
+    "tailwindcss": "^3.4.19"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.3"
+  }
+}
