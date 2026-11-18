@@ -54,7 +54,8 @@ export async function GET(request: Request, { params }: RouteParams) {
       .eq('id', user.id)
       .maybeSingle();
 
-    const isAdminOrTeacher = profile?.role === 'admin' || profile?.role === 'teacher';
+    const isMasterAdmin = user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+    const isAdminOrTeacher = profile?.role === 'admin' || profile?.role === 'teacher' || isMasterAdmin;
 
     const { data: hasAccessData } = await supabaseAdmin
       .rpc('has_course_access', {

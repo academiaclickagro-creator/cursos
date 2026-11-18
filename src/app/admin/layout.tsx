@@ -46,13 +46,14 @@ export default function AdminLayout({
           .eq('id', user.id)
           .maybeSingle();
 
-        const role = profileData?.role || user.user_metadata?.role || 'student';
-        const hasAccess = role === 'admin' || role === 'teacher' || process.env.NODE_ENV === 'development';
+        const isMasterAdmin = user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+        const role = isMasterAdmin ? 'admin' : (profileData?.role || user.user_metadata?.role || 'student');
+        const hasAccess = role === 'admin' || role === 'teacher' || isMasterAdmin || process.env.NODE_ENV === 'development';
 
         setProfile(profileData || { 
           id: user.id, 
           email: user.email, 
-          full_name: profileData?.full_name || user.user_metadata?.full_name || 'Director Académico', 
+          full_name: profileData?.full_name || user.user_metadata?.full_name || 'Administrador Click Agro', 
           role: hasAccess && role !== 'teacher' ? 'admin' : role 
         });
         setIsAuthorized(hasAccess);

@@ -48,7 +48,20 @@ export default function StudentDashboardPage() {
           user.user_metadata?.full_name ||
           'Estudiante';
 
-        setProfile(profileData ? { ...profileData, full_name: resolvedName } : { email: user.email, full_name: resolvedName, role: 'student' });
+        const isSystemAdmin = profileData?.role === 'admin' || 
+          profileData?.role === 'teacher' || 
+          user.user_metadata?.role === 'admin' || 
+          user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+
+        setProfile(profileData ? { 
+          ...profileData, 
+          full_name: resolvedName,
+          role: isSystemAdmin ? 'admin' : (profileData.role || 'student')
+        } : { 
+          email: user.email, 
+          full_name: resolvedName, 
+          role: isSystemAdmin ? 'admin' : 'student' 
+        });
 
         // 1. Obtener todas las matrículas aprobadas del usuario
         const { data: enrollments } = await supabaseBrowser
@@ -80,6 +93,21 @@ export default function StudentDashboardPage() {
             if (cc.courses && !courseIdsSet.has(cc.courses.id)) {
               courseIdsSet.add(cc.courses.id);
               directCourses.push(cc.courses);
+            }
+          });
+        }
+
+        // Si es administrador o docente, otorgar acceso total a todos los cursos de la academia
+        if (isSystemAdmin) {
+          const { data: allCourses } = await supabaseBrowser
+            .from('courses')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          (allCourses || []).forEach((c: any) => {
+            if (!courseIdsSet.has(c.id)) {
+              courseIdsSet.add(c.id);
+              directCourses.push(c);
             }
           });
         }

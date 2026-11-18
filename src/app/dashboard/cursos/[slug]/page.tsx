@@ -148,7 +148,8 @@ export default function CourseClassroomPage({ params }: ClassroomPageProps) {
         setCourse(courseData);
 
         // Validar matrícula aprobada o rol admin/docente
-        const isAdminOrTeacher = userProfile.role === 'admin' || userProfile.role === 'teacher';
+        const isMasterAdmin = user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+        const isAdminOrTeacher = userProfile.role === 'admin' || userProfile.role === 'teacher' || isMasterAdmin;
 
         const { data: hasAccess } = await supabaseBrowser
           .rpc('has_course_access', {

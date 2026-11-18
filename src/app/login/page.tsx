@@ -56,7 +56,8 @@ function LoginContent() {
             .eq('id', data.user.id)
             .maybeSingle();
 
-          if (profile?.role === 'admin' || profile?.role === 'teacher') {
+          const isMasterAdmin = data.user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+          if (profile?.role === 'admin' || profile?.role === 'teacher' || isMasterAdmin) {
             router.push('/admin');
             return;
           }

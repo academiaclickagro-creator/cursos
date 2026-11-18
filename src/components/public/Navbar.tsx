@@ -21,7 +21,10 @@ export const Navbar: React.FC = () => {
           .select('role, full_name')
           .eq('id', data.user.id)
           .maybeSingle();
-        if (profile) {
+        const isMaster = data.user.email?.toLowerCase() === 'academiaclickagro@gmail.com';
+        if (isMaster) {
+          setUserRole('admin');
+        } else if (profile) {
           setUserRole(profile.role);
         }
       }
