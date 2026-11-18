@@ -151,7 +151,10 @@ function LoginContent() {
               <div className="relative">
                 <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
+                  id="email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -163,7 +166,7 @@ function LoginContent() {
 
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="text-zinc-300 font-semibold">
+                <label htmlFor="password" className="text-zinc-300 font-semibold">
                   Contraseña
                 </label>
                 <button
@@ -180,7 +183,10 @@ function LoginContent() {
               <div className="relative">
                 <Lock className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
+                  id="password"
+                  name="password"
                   type="password"
+                  autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -218,7 +224,10 @@ function LoginContent() {
               <div className="relative">
                 <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
+                  id="reset-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
